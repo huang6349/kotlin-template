@@ -9,9 +9,9 @@
         <relativePath/>
     </parent>
     <groupId>org.huangyalong</groupId>
-    <artifactId>kotlin-template</artifactId>
+    <artifactId>qwerty</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>kotlin-template</name>
+    <name>qwerty</name>
     <description>这是一个构建 Kotlin 项目的模板库</description>
     <properties>
         <java.version>1.8</java.version>

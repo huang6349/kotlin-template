@@ -1,0 +1,21 @@
+version: "3.3"
+
+networks:
+  default:
+    external:
+      name: qwerty
+
+services:
+
+  service:
+    build: $PWD/.
+    container_name: qwerty-service
+    ports:
+      - "8085:8085"
+      - "8088:8088"
+    environment:
+      - "WAIT_LOGGER_LEVEL=info"
+      - "WAIT_TIMEOUT=900"
+      - "WAIT_SLEEP_INTERVAL=5"
+      - "TZ=Asia/Shanghai"
+    restart: unless-stopped
