@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-docker-compose -p qwerty up -d --build
-docker ps |grep qwerty
+docker-compose -p project up -d --build
+docker ps |grep project
