@@ -1,5 +1,5 @@
 FROM docker.io/amazoncorretto:8u352
-ADD qwerty-*.jar /app.jar
+ADD project-web-*.jar /app.jar
 ADD wait /wait
 RUN chmod +x /wait
 EXPOSE 8085

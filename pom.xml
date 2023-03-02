@@ -13,9 +13,9 @@
         <relativePath/>
     </parent>
     <groupId>org.huangyalong</groupId>
-    <artifactId>qwerty</artifactId>
+    <artifactId>project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>qwerty</name>
+    <name>project</name>
     <description>这是一个构建 Kotlin 项目的模板库</description>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

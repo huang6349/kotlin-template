@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.huangyalong</groupId>
-        <artifactId>qwerty</artifactId>
+        <artifactId>project</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>project-web</artifactId>
