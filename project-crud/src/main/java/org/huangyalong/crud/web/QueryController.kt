@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import java.io.Serializable
 
-interface QueryController<M : BaseMapper<T>?, T> {
+interface QueryController<M : BaseMapper<T>, T> {
     val service: ServiceImpl<M, T>
 
     @PostMapping("/_query/no-paging")
-    fun postQuery(): List<T>? {
+    fun postQuery(): List<T> {
         return query()
     }
 
     @PostMapping("/_query")
-    fun <E : IPage<T>?> postQueryPage(page: E): E {
+    fun <E : IPage<T>> postQueryPage(page: E): E {
         return queryPage(page)
     }
 
@@ -27,13 +27,13 @@ interface QueryController<M : BaseMapper<T>?, T> {
     }
 
     @GetMapping("/_query/no-paging")
-    fun query(): List<T>? {
+    fun query(): List<T> {
         return service
             .list()
     }
 
     @GetMapping("/_query")
-    fun <E : IPage<T>?> queryPage(page: E): E {
+    fun <E : IPage<T>> queryPage(page: E): E {
         return service
             .page(page)
     }
@@ -43,7 +43,7 @@ interface QueryController<M : BaseMapper<T>?, T> {
         .count()
 
     @GetMapping("/{id:.+}")
-    fun getById(@PathVariable id: Serializable?): T {
+    fun getById(@PathVariable id: Serializable): T {
         return service
             .getById(id)
     }

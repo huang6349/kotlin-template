@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 
-interface SaveController<M : BaseMapper<T>?, T> {
+interface SaveController<M : BaseMapper<T>, T> {
     val service: ServiceImpl<M, T>
 
     @PatchMapping
-    fun save(@RequestBody payload: List<T>?): Boolean {
+    fun save(@RequestBody payload: List<T>): Boolean {
         return service
             .saveOrUpdateBatch(payload)
     }
 
     @PostMapping("/_batch")
-    fun add(@RequestBody payload: List<T>?): Boolean {
+    fun add(@RequestBody payload: List<T>): Boolean {
         return service
             .saveBatch(payload)
     }
@@ -29,7 +29,7 @@ interface SaveController<M : BaseMapper<T>?, T> {
     }
 
     @PutMapping("/_batch")
-    fun update(@RequestBody payload: List<T>?): Boolean {
+    fun update(@RequestBody payload: List<T>): Boolean {
         return service
             .updateBatchById(payload)
     }

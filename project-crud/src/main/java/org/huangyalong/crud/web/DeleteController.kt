@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
 import java.io.Serializable
 
-interface DeleteController<M : BaseMapper<T>?, T> {
+interface DeleteController<M : BaseMapper<T>, T> {
     val service: ServiceImpl<M, T>
 
     @DeleteMapping("/{id:.+}")
-    fun delete(@PathVariable id: Serializable?): Boolean {
+    fun delete(@PathVariable id: Serializable): Boolean {
         return service
             .removeById(id)
     }
