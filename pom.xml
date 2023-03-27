@@ -41,21 +41,18 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>org.anyline</groupId>
+                <artifactId>anyline-dependency</artifactId>
+                <version>8.6.3-20230327</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-bom</artifactId>
                 <version>5.8.12</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>3.5.3.1</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus</artifactId>
-                <version>3.5.3.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
