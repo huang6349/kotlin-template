@@ -41,7 +41,6 @@
         <dependency>
             <groupId>com.github.APIJSON</groupId>
             <artifactId>apijson-framework</artifactId>
-            <version>6.1.0</version>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
