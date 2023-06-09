@@ -41,13 +41,6 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.anyline</groupId>
-                <artifactId>anyline-dependency</artifactId>
-                <version>8.6.3-20230327</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-bom</artifactId>
                 <version>5.8.12</version>
@@ -80,6 +73,10 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 </project>
