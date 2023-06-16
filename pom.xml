@@ -47,11 +47,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>com.github.APIJSON</groupId>
-                <artifactId>apijson-framework</artifactId>
-                <version>6.0.8</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
     <pluginRepositories>
@@ -78,10 +73,6 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-        </repository>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 </project>
