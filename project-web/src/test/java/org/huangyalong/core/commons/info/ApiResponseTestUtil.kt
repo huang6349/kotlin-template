@@ -16,7 +16,7 @@ class ApiResponseTestUtil {
 
         val code: Int = HttpStatus.INTERNAL_SERVER_ERROR.value()
 
-        val e: String = RandomUtil.randomStringUpper(18)
+        val e: String = RandomUtil.randomStringUpper(15)
 
         val traceId: String = IdUtil.randomUUID()
 
