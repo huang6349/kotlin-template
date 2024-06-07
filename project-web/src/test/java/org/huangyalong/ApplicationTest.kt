@@ -1,15 +1,12 @@
 package org.huangyalong
 
 import org.huangyalong.core.AbstractIntegrationTest
+import org.huangyalong.core.IntegrationTest
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.annotation.DirtiesContext
-import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 
-@ExtendWith(SpringExtension::class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-@DirtiesContext
+@AutoConfigureMockMvc
+@IntegrationTest
 class ApplicationTest : AbstractIntegrationTest() {
 
     @Test
