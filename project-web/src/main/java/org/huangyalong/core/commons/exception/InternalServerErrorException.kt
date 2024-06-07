@@ -4,7 +4,7 @@ import java.lang.RuntimeException
 import org.springframework.http.HttpStatus
 import org.huangyalong.core.commons.info.ShowType
 
-class InternalServerErrorException : RuntimeException {
+open class InternalServerErrorException : RuntimeException {
 
     var errorCode: Int? = HttpStatus.INTERNAL_SERVER_ERROR.value()
 
@@ -28,7 +28,7 @@ class InternalServerErrorException : RuntimeException {
     constructor(
         message: String?,
         errorCode: Int?,
-        showType: ShowType,
+        showType: ShowType?,
     ) : super(message) {
         this.errorCode = errorCode
         this.showType = showType
