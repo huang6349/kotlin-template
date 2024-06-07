@@ -1,0 +1,40 @@
+# ===================================================================
+# Spring Boot 会自动扫描 classpath 下的 application.yml 文件，如果有就加载文件配置
+#
+# Spring Boot 中多环境配置文件名需要满足 application-{profile}.yml 的格式，{profile} 对应你的环境标识
+# 本地环境 application-local.yml
+# 开发环境 application-dev.yml
+# 测试环境 application-test.yml
+# 生产环境 application-prod.yml
+# 多环境配置文件激活属性
+# 本地环境 local
+# 开发环境 dev
+# 测试环境 test
+# 生产环境 prod
+# ===================================================================
+
+spring:
+  application:
+    name: project
+
+  profiles:
+    active: dev
+
+  servlet:
+    multipart:
+      enabled: true
+
+management:
+  server:
+    port: 8085
+
+server:
+  port: 8088
+
+camel:
+  springboot:
+    main-run-controller: true
+
+mybatis-flex:
+  global-config:
+    print-banner: false

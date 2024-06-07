@@ -1,0 +1,17 @@
+version: "3.3"
+
+networks:
+  default:
+    external:
+      name: qwerty
+
+services:
+
+  adminer:
+    image: docker.io/adminer:4.8.1
+    container_name: project-adminer
+    ports:
+      - "3318:8080"
+    environment:
+      - "TZ=Asia/Shanghai"
+    restart: unless-stopped

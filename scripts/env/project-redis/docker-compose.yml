@@ -1,0 +1,21 @@
+version: "3.3"
+
+networks:
+  default:
+    external:
+      name: qwerty
+
+services:
+
+  redis:
+    image: docker.io/redis:6.0.17
+    container_name: project-redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    ports:
+      - "6379:6379"
+    environment:
+      - "TZ=Asia/Shanghai"
+    volumes:
+      - "$PWD/redis.conf:/usr/local/etc/redis/redis.conf:ro"
+      - "$PWD/data:/data"
+    restart: unless-stopped
