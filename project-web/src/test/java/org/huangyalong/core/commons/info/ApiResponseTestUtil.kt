@@ -3,7 +3,7 @@ package org.huangyalong.core.commons.info
 import cn.hutool.core.collection.CollUtil
 import cn.hutool.core.util.IdUtil
 import cn.hutool.core.util.RandomUtil
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.springframework.http.HttpStatus
 
 class ApiResponseTestUtil {
@@ -24,16 +24,16 @@ class ApiResponseTestUtil {
 
         fun compare(
             a: ApiResponse<List<Int>>,
-            b: ApiResponse<List<Int>>
+            b: ApiResponse<List<Int>>,
         ) {
-            Assertions.assertThat(a.success).isEqualTo(b.success)
-            Assertions.assertThat(a.data).isEqualTo(b.data)
-            Assertions.assertThat(a.message).isEqualTo(b.message)
-            Assertions.assertThat(a.code).isEqualTo(b.code)
-            Assertions.assertThat(a.showType).isEqualTo(b.showType)
-            Assertions.assertThat(a.e).isEqualTo(b.e)
-            Assertions.assertThat(a.traceId).isEqualTo(b.traceId)
-            Assertions.assertThat(a.host).isEqualTo(b.host)
+            assertThat(a.success).isEqualTo(b.success)
+            assertThat(a.data).isEqualTo(b.data)
+            assertThat(a.message).isEqualTo(b.message)
+            assertThat(a.code).isEqualTo(b.code)
+            assertThat(a.showType).isEqualTo(b.showType)
+            assertThat(a.e).isEqualTo(b.e)
+            assertThat(a.traceId).isEqualTo(b.traceId)
+            assertThat(a.host).isEqualTo(b.host)
         }
     }
 }

@@ -3,7 +3,7 @@ package org.huangyalong.core.commons.exception
 import org.huangyalong.core.commons.info.ShowType
 import org.springframework.http.HttpStatus
 
-class BadRequestException : InternalServerErrorException {
+open class BadRequestException : InternalServerErrorException {
 
     constructor(
         message: String?,

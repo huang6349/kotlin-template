@@ -3,7 +3,7 @@ package org.huangyalong.core.commons.exception
 import org.huangyalong.core.commons.info.ShowType
 import org.springframework.http.HttpStatus
 
-open class DataAlreadyExistException : InternalServerErrorException {
+open class DataNotExistException : InternalServerErrorException {
 
     constructor() : super(
         Companion.message,
@@ -87,9 +87,9 @@ open class DataAlreadyExistException : InternalServerErrorException {
 
     companion object {
 
-        var errorCode: Int? = HttpStatus.CONFLICT.value()
+        var errorCode: Int? = HttpStatus.NOT_FOUND.value()
 
-        var message: String? = "数据已存在"
+        var message: String? = "数据不存在"
 
         var showType: ShowType? = ShowType.WARN_MESSAGE
     }

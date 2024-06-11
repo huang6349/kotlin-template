@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 import java.io.Serializable
 
 @Schema(name = "响应信息")
-class ApiResponse<T> : Serializable {
+open class ApiResponse<T> : Serializable {
 
     @Schema(description = "响应状态")
     var success: Boolean? = null
@@ -30,19 +30,33 @@ class ApiResponse<T> : Serializable {
     @Schema(description = "主机地址")
     var host: String? = null
 
-    constructor(success: Boolean, data: T) {
+    constructor(
+        success: Boolean,
+        data: T,
+    ) {
         this.success = success
         this.data = data
     }
 
-    constructor(success: Boolean, data: T, message: String?, showType: Int?) {
+    constructor(
+        success: Boolean,
+        data: T,
+        message: String?,
+        showType: Int?,
+    ) {
         this.success = success
         this.data = data
         this.message = message
         this.showType = showType
     }
 
-    constructor(success: Boolean, message: String?, code: Int?, showType: Int?, e: String?) {
+    constructor(
+        success: Boolean,
+        message: String?,
+        code: Int?,
+        showType: Int?,
+        e: String?,
+    ) {
         this.success = success
         this.message = message
         this.code = code
@@ -57,7 +71,7 @@ class ApiResponse<T> : Serializable {
         showType: Int?,
         e: String?,
         traceId: String?,
-        host: String?
+        host: String?,
     ) {
         this.success = success
         this.message = message
@@ -72,8 +86,9 @@ class ApiResponse<T> : Serializable {
 
         fun <T> fail(
             message: String?,
-            code: Int?, e:
-            String?
+            code: Int?,
+            e:
+            String?,
         ): ApiResponse<T> = ApiResponse(
             false,
             message,
@@ -86,7 +101,7 @@ class ApiResponse<T> : Serializable {
             message: String?,
             code: Int?,
             e: String?,
-            showType: Int?
+            showType: Int?,
         ): ApiResponse<T> = ApiResponse(
             false,
             message,
@@ -100,7 +115,7 @@ class ApiResponse<T> : Serializable {
             code: Int?,
             e: String?,
             traceId: String?,
-            host: String?
+            host: String?,
         ): ApiResponse<T> = ApiResponse(
             false,
             message,
@@ -117,7 +132,7 @@ class ApiResponse<T> : Serializable {
             e: String?,
             showType: Int?,
             traceId: String?,
-            host: String?
+            host: String?,
         ): ApiResponse<T> = ApiResponse(
             false,
             message,
@@ -135,7 +150,7 @@ class ApiResponse<T> : Serializable {
 
         fun <T> ok(
             data: T,
-            message: String?
+            message: String?,
         ): ApiResponse<T> = ApiResponse(
             true,
             data,
@@ -146,7 +161,7 @@ class ApiResponse<T> : Serializable {
         fun <T> ok(
             data: T,
             message: String?,
-            showType: Int?
+            showType: Int?,
         ): ApiResponse<T> = ApiResponse(
             true,
             data,
