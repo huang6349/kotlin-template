@@ -15,7 +15,8 @@ class BadRequestException : InternalServerErrorException {
     constructor(
         message: String?,
         showType: ShowType?,
-    ) : super(message,
+    ) : super(
+        message,
         Companion.errorCode,
         showType
     )
@@ -24,7 +25,8 @@ class BadRequestException : InternalServerErrorException {
         message: String?,
         traceId: String?,
         host: String?,
-    ) : super(message,
+    ) : super(
+        message,
         Companion.errorCode,
         traceId,
         host
@@ -35,7 +37,8 @@ class BadRequestException : InternalServerErrorException {
         showType: ShowType?,
         traceId: String?,
         host: String?,
-    ) : super(message,
+    ) : super(
+        message,
         Companion.errorCode,
         showType,
         traceId,
@@ -43,6 +46,7 @@ class BadRequestException : InternalServerErrorException {
     )
 
     companion object {
+
         var errorCode: Int? = HttpStatus.BAD_REQUEST.value()
     }
 }
