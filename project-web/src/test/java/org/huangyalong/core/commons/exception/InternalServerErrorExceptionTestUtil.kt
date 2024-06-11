@@ -19,18 +19,32 @@ class InternalServerErrorExceptionTestUtil {
 
         val host: String = RandomUtil.randomStringUpper(15)
 
-        fun execute1(): Unit = throw InternalServerErrorException(errorMessage)
+        fun execute1() {
+            throw InternalServerErrorException(errorMessage)
+        }
 
-        fun execute2(): Unit = throw InternalServerErrorException(errorMessage, errorCode)
+        fun execute2() {
+            throw InternalServerErrorException(errorMessage, errorCode)
+        }
 
-        fun execute3(): Unit = throw InternalServerErrorException(errorMessage, errorCode, showType)
+        fun execute3() {
+            throw InternalServerErrorException(errorMessage, errorCode, showType)
+        }
 
-        fun execute4(): Unit = throw InternalServerErrorException(errorMessage, traceId, host)
+        fun execute4() {
+            throw InternalServerErrorException(errorMessage, traceId, host)
+        }
 
-        fun execute5(): Unit = throw InternalServerErrorException(errorMessage, errorCode, traceId, host)
+        fun execute5() {
+            throw InternalServerErrorException(errorMessage, errorCode, traceId, host)
+        }
 
-        fun execute6(): Unit = throw InternalServerErrorException(errorMessage, showType, traceId, host)
+        fun execute6() {
+            throw InternalServerErrorException(errorMessage, showType, traceId, host)
+        }
 
-        fun execute7(): Unit = throw InternalServerErrorException(errorMessage, errorCode, showType, traceId, host)
+        fun execute7() {
+            throw InternalServerErrorException(errorMessage, errorCode, showType, traceId, host)
+        }
     }
 }

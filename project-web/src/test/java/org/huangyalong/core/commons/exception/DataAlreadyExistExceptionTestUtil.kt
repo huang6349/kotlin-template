@@ -16,20 +16,36 @@ class DataAlreadyExistExceptionTestUtil {
 
         val host: String = RandomUtil.randomStringUpper(15)
 
-        fun execute1(): Unit = throw DataAlreadyExistException()
+        fun execute1() {
+            throw DataAlreadyExistException()
+        }
 
-        fun execute2(): Unit = throw DataAlreadyExistException(errorMessage)
+        fun execute2() {
+            throw DataAlreadyExistException(errorMessage)
+        }
 
-        fun execute3(): Unit = throw DataAlreadyExistException(showType)
+        fun execute3() {
+            throw DataAlreadyExistException(showType)
+        }
 
-        fun execute4(): Unit = throw DataAlreadyExistException(errorMessage, showType)
+        fun execute4() {
+            throw DataAlreadyExistException(errorMessage, showType)
+        }
 
-        fun execute5(): Unit = throw DataAlreadyExistException(traceId, host)
+        fun execute5() {
+            throw DataAlreadyExistException(traceId, host)
+        }
 
-        fun execute6(): Unit = throw DataAlreadyExistException(errorMessage, traceId, host)
+        fun execute6() {
+            throw DataAlreadyExistException(errorMessage, traceId, host)
+        }
 
-        fun execute7(): Unit = throw DataAlreadyExistException(showType, traceId, host)
+        fun execute7() {
+            throw DataAlreadyExistException(showType, traceId, host)
+        }
 
-        fun execute8(): Unit = throw DataAlreadyExistException(errorMessage, showType, traceId, host)
+        fun execute8() {
+            throw DataAlreadyExistException(errorMessage, showType, traceId, host)
+        }
     }
 }

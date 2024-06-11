@@ -16,20 +16,36 @@ class DataNotExistExceptionTestUtil {
 
         val host: String = RandomUtil.randomStringUpper(15)
 
-        fun execute1(): Unit = throw DataNotExistException()
+        fun execute1() {
+            throw DataNotExistException()
+        }
 
-        fun execute2(): Unit = throw DataNotExistException(errorMessage)
+        fun execute2() {
+            throw DataNotExistException(errorMessage)
+        }
 
-        fun execute3(): Unit = throw DataNotExistException(showType)
+        fun execute3() {
+            throw DataNotExistException(showType)
+        }
 
-        fun execute4(): Unit = throw DataNotExistException(errorMessage, showType)
+        fun execute4() {
+            throw DataNotExistException(errorMessage, showType)
+        }
 
-        fun execute5(): Unit = throw DataNotExistException(traceId, host)
+        fun execute5() {
+            throw DataNotExistException(traceId, host)
+        }
 
-        fun execute6(): Unit = throw DataNotExistException(errorMessage, traceId, host)
+        fun execute6() {
+            throw DataNotExistException(errorMessage, traceId, host)
+        }
 
-        fun execute7(): Unit = throw DataNotExistException(showType, traceId, host)
+        fun execute7() {
+            throw DataNotExistException(showType, traceId, host)
+        }
 
-        fun execute8(): Unit = throw DataNotExistException(errorMessage, showType, traceId, host)
+        fun execute8() {
+            throw DataNotExistException(errorMessage, showType, traceId, host)
+        }
     }
 }

@@ -16,12 +16,20 @@ class BadRequestExceptionTestUtil {
 
         val host: String = RandomUtil.randomStringUpper(15)
 
-        fun execute1(): Unit = throw BadRequestException(errorMessage)
+        fun execute1() {
+            throw BadRequestException(errorMessage)
+        }
 
-        fun execute2(): Unit = throw BadRequestException(errorMessage, showType)
+        fun execute2() {
+            throw BadRequestException(errorMessage, showType)
+        }
 
-        fun execute3(): Unit = throw BadRequestException(errorMessage, traceId, host)
+        fun execute3() {
+            throw BadRequestException(errorMessage, traceId, host)
+        }
 
-        fun execute4(): Unit = throw BadRequestException(errorMessage, showType, traceId, host)
+        fun execute4() {
+            throw BadRequestException(errorMessage, showType, traceId, host)
+        }
     }
 }
