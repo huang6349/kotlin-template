@@ -10,7 +10,6 @@
             <charset>UTF-8</charset>
         </encoder>
     </appender>
-
     <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 如果只是想要 INFO 级别的日志，只是过滤 INFO 还是会输出 ERROR 日志，因为 ERROR 的级别高，所以我们使用下面的策略，可以避免输出 ERROR 的日志 -->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -41,7 +40,6 @@
             <charset>UTF-8</charset> <!-- 此处设置字符集 -->
         </encoder>
     </appender>
-
     <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 如果只是想要 ERROR 级别的日志，那么需要过滤一下，默认是 INFO 级别的，ThresholdFilter -->
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
@@ -65,7 +63,6 @@
             <charset>UTF-8</charset> <!-- 此处设置字符集 -->
         </encoder>
     </appender>
-
     <root level="info">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE_INFO"/>
