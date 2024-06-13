@@ -5,7 +5,8 @@ import org.huangyalong.core.enums.IsDeleted;
 import java.util.Date;
 
 @SuppressWarnings("unused")
-public interface BaseEntity<T extends BaseEntity<T>> extends Entity<T> {
+public interface BaseEntity<T extends BaseEntity<T>>
+        extends Entity<T> {
 
     Long getId();
 

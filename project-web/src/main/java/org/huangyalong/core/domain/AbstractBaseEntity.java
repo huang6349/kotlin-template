@@ -16,8 +16,8 @@ import java.util.Date;
 
 @Getter
 @Setter
-public abstract class AbstractBaseEntity<T extends AbstractBaseEntity<T>> extends Model<T>
-        implements BaseEntity<T> {
+public abstract class AbstractBaseEntity<T extends AbstractBaseEntity<T>>
+        extends Model<T> implements BaseEntity<T> {
 
     @Id(keyType = KeyType.Generator, value = KeyGenerators.flexId)
     @JsonFormat(shape = JsonFormat.Shape.STRING)
