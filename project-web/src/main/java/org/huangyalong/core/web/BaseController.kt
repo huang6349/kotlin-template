@@ -1,8 +1,8 @@
-package org.huangyalong.core.web;
+package org.huangyalong.core.web
 
-import com.mybatisflex.core.service.IService;
+import com.mybatisflex.core.service.IService
 
-public interface BaseController<E> {
+interface BaseController<E> {
 
-    IService<E> getService();
+    val service: IService<E>?
 }

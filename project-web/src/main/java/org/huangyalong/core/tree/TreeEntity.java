@@ -5,7 +5,8 @@ import org.huangyalong.core.domain.BaseEntity;
 import java.util.List;
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public interface TreeEntity<T extends TreeEntity<T>> extends BaseEntity<T> {
+public interface TreeEntity<T extends TreeEntity<T>>
+        extends BaseEntity<T> {
 
     Long getParentId();
 

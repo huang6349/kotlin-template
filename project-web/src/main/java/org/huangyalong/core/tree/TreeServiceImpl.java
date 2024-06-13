@@ -4,7 +4,8 @@ import com.mybatisflex.core.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-public class TreeServiceImpl<M extends BaseMapper<T>, T extends TreeEntity<T>>
+public class TreeServiceImpl<M extends BaseMapper<T>,
+        T extends TreeEntity<T>>
         implements TreeIService<T> {
 
     @Autowired

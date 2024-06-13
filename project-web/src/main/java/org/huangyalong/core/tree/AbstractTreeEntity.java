@@ -12,7 +12,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public abstract class AbstractTreeEntity<T extends AbstractTreeEntity<T>> extends AbstractBaseEntity<T>
+public abstract class AbstractTreeEntity<T extends AbstractTreeEntity<T>>
+        extends AbstractBaseEntity<T>
         implements TreeEntity<T> {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)

@@ -8,7 +8,8 @@ import lombok.val;
 
 import java.util.List;
 
-public interface TreeIService<T extends TreeEntity<T>> extends IService<T> {
+public interface TreeIService<T extends TreeEntity<T>>
+        extends IService<T> {
 
     default String getPath(Long parentId) {
         val parentPath = Opt.ofNullable(parentId)
@@ -22,7 +23,8 @@ public interface TreeIService<T extends TreeEntity<T>> extends IService<T> {
         val fieldName = LambdaUtil.getFieldName(T::getPath);
         val query = QueryWrapper.create()
                 .like(fieldName, getPath(parentId));
-        return TreeUtil.list2Tree(list(query), Opt.ofNullable(parentId)
-                .orElse(0L));
+        return TreeUtil.list2Tree(list(query),
+                Opt.ofNullable(parentId)
+                        .orElse(0L));
     }
 }
