@@ -1,0 +1,22 @@
+version: "3.3"
+
+networks:
+  default:
+    external:
+      name: qwerty
+
+services:
+
+  minio:
+    image: docker.io/minio/minio:RELEASE.2021-06-17T00-10-46Z
+    container_name: project-minio
+    command: server /data --address :9010
+    ports:
+      - "9010:9010"
+    environment:
+      - 'MINIO_ROOT_USER=root'
+      - 'MINIO_ROOT_PASSWORD=12345678'
+      - "TZ=Asia/Shanghai"
+    volumes:
+      - "$PWD/data:/data"
+    restart: unless-stopped

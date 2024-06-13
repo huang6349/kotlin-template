@@ -84,6 +84,7 @@ open class ApiResponse<T> : Serializable {
 
     companion object {
 
+        @JvmStatic
         fun <T> fail(
             message: String?,
             code: Int?,
@@ -97,6 +98,7 @@ open class ApiResponse<T> : Serializable {
             e
         )
 
+        @JvmStatic
         fun <T> fail(
             message: String?,
             code: Int?,
@@ -110,6 +112,7 @@ open class ApiResponse<T> : Serializable {
             e
         )
 
+        @JvmStatic
         fun <T> fail(
             message: String?,
             code: Int?,
@@ -126,6 +129,7 @@ open class ApiResponse<T> : Serializable {
             host
         )
 
+        @JvmStatic
         fun <T> fail(
             message: String?,
             code: Int?,
@@ -143,11 +147,15 @@ open class ApiResponse<T> : Serializable {
             host
         )
 
-        fun <T> ok(data: T): ApiResponse<T> = ApiResponse(
+        @JvmStatic
+        fun <T> ok(
+            data: T,
+        ): ApiResponse<T> = ApiResponse(
             true,
             data
         )
 
+        @JvmStatic
         fun <T> ok(
             data: T,
             message: String?,
@@ -158,6 +166,7 @@ open class ApiResponse<T> : Serializable {
             ShowType.WARN_MESSAGE.showType
         )
 
+        @JvmStatic
         fun <T> ok(
             data: T,
             message: String?,

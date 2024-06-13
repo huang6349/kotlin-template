@@ -33,3 +33,16 @@ spring:
         max-active: 10
         max-idle: 200
         max-wait: -1ms
+
+dromara:
+
+  x-file-storage:
+    default-platform: default-local
+    local-plus:
+      - platform: default-local
+        enable-storage: true
+        enable-access: true
+        domain: http://127.0.0.1:8088/file/
+        base-path: test/
+        path-patterns: /file/**
+        storage-path: C:/project/
