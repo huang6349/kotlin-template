@@ -1,6 +1,5 @@
-package org.huangyalong.core.request;
+package org.huangyalong.core.request
 
-import java.io.Serializable;
+import java.io.Serializable
 
-public interface BaseQueries extends Serializable {
-}
+interface BaseQueries : Serializable
