@@ -1,4 +1,4 @@
-FROM docker.io/amazoncorretto:8u352
+FROM registry.cn-hangzhou.aliyuncs.com/huang6349/amazoncorretto:8u412
 ADD project-web-*.jar /app.jar
 ADD wait /wait
 RUN chmod +x /wait

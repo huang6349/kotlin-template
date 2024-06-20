@@ -8,7 +8,7 @@ networks:
 services:
 
   mysql:
-    image: docker.io/mysql:8.0.31
+    image: registry.cn-hangzhou.aliyuncs.com/huang6349/mysql:8.0.31
     container_name: project-mysql
     security_opt:
       - "seccomp:unconfined"
