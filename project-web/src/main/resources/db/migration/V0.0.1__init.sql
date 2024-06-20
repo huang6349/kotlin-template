@@ -42,11 +42,6 @@ CREATE TABLE IF NOT EXISTS project.`tb_tenant_assoc`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT '租户关联';
 
 -- ----------------------------
--- Records of tb_tenant_assoc
--- ----------------------------
-INSERT INTO project.`tb_tenant_assoc` (`id`, `tenant_id`, `assoc`, `assoc_id`) VALUES (10000000000000000, 10000000000000000, 'tb_account', 10000000000000000);
-
--- ----------------------------
 -- Table structure for tb_tenant_property
 -- ----------------------------
 CREATE TABLE IF NOT EXISTS project.`tb_tenant_property`
