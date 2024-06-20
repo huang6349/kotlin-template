@@ -4,7 +4,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://project-mysql:3306/project?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
-    password: 123456
+    password: pwd123456
     hikari:
       minimum-idle: 5
       connection-test-query: SELECT 1 FROM DUAL
@@ -25,7 +25,7 @@ spring:
     database: 0
     host: project-redis
     port: 6379
-    password: 123456
+    password: pwd123456
     timeout: 10s
     lettuce:
       pool:
@@ -37,12 +37,13 @@ spring:
 dromara:
 
   x-file-storage:
-    default-platform: default-local
-    local-plus:
-      - platform: default-local
+    default-platform: default-minio
+    minio:
+      - platform: default-minio
         enable-storage: true
-        enable-access: true
-        domain: http://127.0.0.1:8088/file/
+        access-key: minio
+        secret-key: pwd123456
+        end-point: http://project-minio:9000
+        bucket-name: project
+        domain: http://project-minio:9001/browser/project/
         base-path: prod/
-        path-patterns: /file/**
-        storage-path: C:/project/
