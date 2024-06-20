@@ -62,7 +62,6 @@ public class FileController {
                             .without())
                     .outputStream(out);
         } catch (IOException e) {
-            e.printStackTrace();
             throw new BadRequestException("下载失败，服务器暂时无法处理这个文件");
         }
     }

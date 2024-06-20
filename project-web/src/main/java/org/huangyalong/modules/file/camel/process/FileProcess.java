@@ -6,7 +6,6 @@ import com.mybatisflex.core.query.QueryWrapper;
 import lombok.val;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.huangyalong.modules.file.service.FileService;
 import org.huangyalong.modules.file.domain.File;
 import org.huangyalong.modules.file.enums.FileStatus;
 import org.huangyalong.modules.file.service.FileService;
