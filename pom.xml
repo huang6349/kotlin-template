@@ -16,7 +16,7 @@
     </parent>
     <groupId>org.huangyalong</groupId>
     <artifactId>project</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}</version>
     <name>project</name>
     <description>这是一个构建 Kotlin 项目的模板库</description>
     <properties>
@@ -28,6 +28,7 @@
         <project.build.jdk>${java.version}</project.build.jdk>
         <kotlin.version>1.7.21</kotlin.version>
         <kotlin.incremental.useClasspathSnapshot>true</kotlin.incremental.useClasspathSnapshot>
+        <revision>0.0.1-SNAPSHOT</revision>
     </properties>
     <dependencyManagement>
         <dependencies>
