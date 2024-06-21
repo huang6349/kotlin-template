@@ -6,37 +6,37 @@ import org.huangyalong.core.commons.info.ShowType
 
 open class InternalServerErrorException : RuntimeException {
 
-    var errorCode: Int? = HttpStatus.INTERNAL_SERVER_ERROR.value()
+    var errorCode: Int = HttpStatus.INTERNAL_SERVER_ERROR.value()
 
-    var showType: ShowType? = ShowType.ERROR_MESSAGE
+    var showType: ShowType = ShowType.ERROR_MESSAGE
 
     var traceId: String? = null
 
     var host: String? = null
 
     constructor(
-        message: String?,
+        message: String,
     ) : super(message)
 
     constructor(
-        message: String?,
-        errorCode: Int?,
+        message: String,
+        errorCode: Int,
     ) : super(message) {
         this.errorCode = errorCode
     }
 
     constructor(
-        message: String?,
-        errorCode: Int?,
-        showType: ShowType?,
+        message: String,
+        errorCode: Int,
+        showType: ShowType,
     ) : super(message) {
         this.errorCode = errorCode
         this.showType = showType
     }
 
     constructor(
-        message: String?,
-        traceId: String?,
+        message: String,
+        traceId: String,
         host: String?,
     ) : super(message) {
         this.traceId = traceId
@@ -44,8 +44,8 @@ open class InternalServerErrorException : RuntimeException {
     }
 
     constructor(
-        message: String?,
-        errorCode: Int?,
+        message: String,
+        errorCode: Int,
         traceId: String?,
         host: String?,
     ) : super(message) {
@@ -55,8 +55,8 @@ open class InternalServerErrorException : RuntimeException {
     }
 
     constructor(
-        message: String?,
-        showType: ShowType?,
+        message: String,
+        showType: ShowType,
         traceId: String?,
         host: String?,
     ) : super(message) {
@@ -66,9 +66,9 @@ open class InternalServerErrorException : RuntimeException {
     }
 
     constructor(
-        message: String?,
-        errorCode: Int?,
-        showType: ShowType?,
+        message: String,
+        errorCode: Int,
+        showType: ShowType,
         traceId: String?,
         host: String?,
     ) : super(message) {

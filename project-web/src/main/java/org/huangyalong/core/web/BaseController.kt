@@ -4,5 +4,5 @@ import com.mybatisflex.core.service.IService
 
 interface BaseController<E> {
 
-    val service: IService<E>?
+    val service: IService<E>
 }

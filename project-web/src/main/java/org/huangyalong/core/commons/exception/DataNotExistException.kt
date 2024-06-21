@@ -12,7 +12,7 @@ open class DataNotExistException : InternalServerErrorException {
     )
 
     constructor(
-        message: String?,
+        message: String,
     ) : super(
         message,
         Companion.errorCode,
@@ -20,7 +20,7 @@ open class DataNotExistException : InternalServerErrorException {
     )
 
     constructor(
-        showType: ShowType?,
+        showType: ShowType,
     ) : super(
         Companion.message,
         Companion.errorCode,
@@ -28,8 +28,8 @@ open class DataNotExistException : InternalServerErrorException {
     )
 
     constructor(
-        message: String?,
-        showType: ShowType?,
+        message: String,
+        showType: ShowType,
     ) : super(
         message,
         Companion.errorCode,
@@ -49,7 +49,7 @@ open class DataNotExistException : InternalServerErrorException {
     )
 
     constructor(
-        message: String?,
+        message: String,
         traceId: String?,
         host: String?,
     ) : super(
@@ -61,7 +61,7 @@ open class DataNotExistException : InternalServerErrorException {
     )
 
     constructor(
-        showType: ShowType?,
+        showType: ShowType,
         traceId: String?,
         host: String?,
     ) : super(
@@ -73,8 +73,8 @@ open class DataNotExistException : InternalServerErrorException {
     )
 
     constructor(
-        message: String?,
-        showType: ShowType?,
+        message: String,
+        showType: ShowType,
         traceId: String?,
         host: String?,
     ) : super(
@@ -87,10 +87,10 @@ open class DataNotExistException : InternalServerErrorException {
 
     companion object {
 
-        var errorCode: Int? = HttpStatus.NOT_FOUND.value()
+        var errorCode: Int = HttpStatus.NOT_FOUND.value()
 
-        var message: String? = "数据不存在"
+        var message: String = "数据不存在"
 
-        var showType: ShowType? = ShowType.WARN_MESSAGE
+        var showType: ShowType = ShowType.WARN_MESSAGE
     }
 }
