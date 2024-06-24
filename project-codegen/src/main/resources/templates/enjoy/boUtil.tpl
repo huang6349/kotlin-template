@@ -1,6 +1,3 @@
-#set(entityClassName = table.buildEntityClassName())
-#set(boClassName = entityClassName.concat("BO"))
-#set(boVarName = firstCharToLowerCase(boClassName))
 package #(boUtilPackage);
 
 import cn.hutool.json.JSONObject;
