@@ -16,6 +16,7 @@ public class CodegenUtil {
         GeneratorFactory.registerGenerator("queries", new QueriesGenerator());
         GeneratorFactory.registerGenerator("queriesUtil", new QueriesUtilGenerator());
         GeneratorFactory.registerGenerator("bo", new BOGenerator());
+        GeneratorFactory.registerGenerator("boUtil", new BOUtilGenerator());
         GeneratorFactory.registerGenerator("controllerTest", new ControllerTestGenerator());
 
         // 配置数据源

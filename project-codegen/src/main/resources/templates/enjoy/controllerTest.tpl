@@ -57,16 +57,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional(propagation = Propagation.REQUIRED)
 class #(controllerClassName) extends AbstractControllerTest<#(serviceClassName), #(entityClassName)> {
 
-    public static #(boClassName) createUpdatedBO(Long id) {
-        val #(boVarName) = new #(boClassName)();
-        #(boVarName).setId(id);
-        return #(boVarName);
-    }
-
-    public static #(boClassName) createBO() {
-        return new #(boClassName)();
-    }
-
     @Resource
     private MockMvc mvc;
 
