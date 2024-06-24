@@ -1,3 +1,9 @@
+#set(basePackage = packageConfig.basePackage)
+#set(boUtilPackage = basePackage.concat(".request"))
+#set(entityClassName = table.buildEntityClassName())
+#set(boUtilClassName = entityClassName.concat("Util"))
+#set(boClassName = entityClassName.concat("BO"))
+#set(boVarName = firstCharToLowerCase(boClassName))
 package #(boUtilPackage);
 
 import cn.hutool.json.JSONObject;

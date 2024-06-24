@@ -23,9 +23,6 @@ public class BOUtilGenerator implements IGenerator {
         val tableDefConfig = globalConfig.getTableDefConfig();
         val javadocConfig = globalConfig.getJavadocConfig();
         val sourceDir = StrUtil.replaceFirst(packageConfig.getSourceDir(), "main", "test");
-        val boPackage = packageConfig.getBasePackage().concat(".request");
-        val boClassName = table.buildEntityClassName().concat("BO");
-        val boVarName = StrUtil.lowerFirst(boClassName);
         val boUtilPackage = packageConfig.getBasePackage().concat(".request");
         val boUtilClassName = table.buildEntityClassName().concat("Util");
         val boUtilPackagePath = boUtilPackage.replace(".", "/");
@@ -36,11 +33,6 @@ public class BOUtilGenerator implements IGenerator {
         params.put("packageConfig", packageConfig);
         params.put("tableDefConfig", tableDefConfig);
         params.put("javadocConfig", javadocConfig);
-        params.put("boPackage", boPackage);
-        params.put("boClassName", boClassName);
-        params.put("boVarName", boVarName);
-        params.put("boUtilPackage", boUtilPackage);
-        params.put("boUtilClassName", boUtilClassName);
         globalConfig.getTemplateConfig().getTemplate().generate(params, templatePath, boUtilJavaFile);
         System.out.println("BOUtil ---> " + boUtilJavaFile);
     }
