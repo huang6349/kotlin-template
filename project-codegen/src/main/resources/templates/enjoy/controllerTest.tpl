@@ -3,59 +3,51 @@
 #set(entityPackage = packageConfig.entityPackage)
 #set(basePackage = packageConfig.basePackage)
 #set(boPackage = basePackage.concat(".request"))
+#set(boUtilPackage = basePackage.concat(".request"))
 #set(tableDefClassName = table.buildTableDefClassName())
-#set(controllerClassName = table.buildControllerClassName().concat("Test"))
+#set(controllerClassName = table.buildControllerClassName())
 #set(serviceClassName = table.buildServiceClassName())
 #set(entityClassName = table.buildEntityClassName())
 #set(boClassName = entityClassName.concat("BO"))
+#set(boUtilClassName = entityClassName.concat("Util"))
 #set(tableDefVarName = tableDefConfig.buildFieldName(entityClassName + tableDefConfig.instanceSuffix))
 #set(entitysVarName = firstCharToLowerCase(entityClassName).concat("s"))
 #set(entityVarName = firstCharToLowerCase(entityClassName))
 #set(boVarName = firstCharToLowerCase(boClassName))
-package #(controllerPackage);
+package #(packageName);
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
+import cn.hutool.json.JSONObject;
 import com.mybatisflex.core.query.QueryWrapper;
 import lombok.val;
 import org.assertj.core.api.Assertions;
+import org.huangyalong.core.IntegrationTest;
 import org.huangyalong.core.enums.IsDeleted;
 import org.huangyalong.core.web.AbstractControllerTest;
 import #(entityPackage).#(entityClassName);
-import #(boPackage).#(boClassName);
+import #(boUtilPackage).#(boUtilClassName);
 import #(servicePackage).#(serviceClassName);
+import org.huangyalong.web.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static org.huangyalong.domain.table.#(tableDefClassName).#(tableDefVarName);
-import static org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import static #(basePackage).domain.table.#(tableDefClassName).#(tableDefVarName);
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc
-@TestMethodOrder(OrderAnnotation.class)
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = WebEnvironment.MOCK)
-@DirtiesContext
-@Transactional(propagation = Propagation.REQUIRED)
-class #(controllerClassName) extends AbstractControllerTest<#(serviceClassName), #(entityClassName)> {
+@IntegrationTest
+class #(className) extends AbstractControllerTest<#(serviceClassName), #(entityClassName)> {
 
     @Resource
     private MockMvc mvc;
@@ -73,7 +65,7 @@ class #(controllerClassName) extends AbstractControllerTest<#(serviceClassName),
         mvc.perform(MockMvcRequestBuilders.post("/#(entityVarName)")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(createBO())))
+                        .content(TestUtil.convertObjectToJsonBytes(#(boUtilClassName).createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -85,7 +77,7 @@ class #(controllerClassName) extends AbstractControllerTest<#(serviceClassName),
             Assertions.assertThat(test#(entityClassName).getCreateTime()).isNotNull();
             Assertions.assertThat(test#(entityClassName).getUpdateTime()).isNotNull();
             Assertions.assertThat(test#(entityClassName).getVersion()).isNotNull();
-            Assertions.assertThat(test#(entityClassName).getIsDeleted()).isEqualTo(IsDeleted.UNDELETED);
+            Assertions.assertThat(test#(entityClassName).getIsDeleted()).isEqualTo(IsDeleted.TYPE0);
         });
     }
 
@@ -93,16 +85,22 @@ class #(controllerClassName) extends AbstractControllerTest<#(serviceClassName),
     @Test
     void update() throws Exception {
         val beforeSize = Convert.toInt(getService().count());
-        getService().add(createBO());
+        mvc.perform(MockMvcRequestBuilders.post("/#(entityVarName)")
+                        .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(TestUtil.convertObjectToJsonBytes(#(boUtilClassName).createBO())))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$.success").value(true));
         val #(entityVarName) = getService().getOne(QueryWrapper.create()
-                .orderBy(#(tableDefVarName).CREATE_TIME.desc())
-                .limit(1));
+                .orderBy(#(tableDefVarName).ID.desc()));
         Assertions.assertThat(#(entityVarName)).isNotNull();
-        val id = #(entityVarName).getId();
+        Assertions.assertThat(#(entityVarName).getId()).isNotNull();
         mvc.perform(MockMvcRequestBuilders.put("/#(entityVarName)")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(createUpdatedBO(id))))
+                        .content(TestUtil.convertObjectToJsonBytes(#(boUtilClassName).createBO(new JSONObject()
+                                .set("id", #(entityVarName).getId())))))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -114,7 +112,7 @@ class #(controllerClassName) extends AbstractControllerTest<#(serviceClassName),
             Assertions.assertThat(test#(entityClassName).getCreateTime()).isNotNull();
             Assertions.assertThat(test#(entityClassName).getUpdateTime()).isNotNull();
             Assertions.assertThat(test#(entityClassName).getVersion()).isNotNull();
-            Assertions.assertThat(test#(entityClassName).getIsDeleted()).isEqualTo(IsDeleted.UNDELETED);
+            Assertions.assertThat(test#(entityClassName).getIsDeleted()).isEqualTo(IsDeleted.TYPE0);
         });
     }
 
@@ -122,7 +120,13 @@ class #(controllerClassName) extends AbstractControllerTest<#(serviceClassName),
     @Test
     void queryPage() throws Exception {
         val beforeSize = Convert.toInt(getService().count());
-        getService().add(createBO());
+        mvc.perform(MockMvcRequestBuilders.post("/#(entityVarName)")
+                        .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(TestUtil.convertObjectToJsonBytes(#(boUtilClassName).createBO())))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$.success").value(true));
         assertPersisted(#(entitysVarName) -> Assertions.assertThat(#(entitysVarName))
                 .hasSize(Convert.toInt(beforeSize + 1)));
         mvc.perform(MockMvcRequestBuilders.get("/#(entityVarName)/_query/paging")
@@ -138,7 +142,13 @@ class #(controllerClassName) extends AbstractControllerTest<#(serviceClassName),
     @Test
     void query() throws Exception {
         val beforeSize = Convert.toInt(getService().count());
-        getService().add(createBO());
+        mvc.perform(MockMvcRequestBuilders.post("/#(entityVarName)")
+                        .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(TestUtil.convertObjectToJsonBytes(#(boUtilClassName).createBO())))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$.success").value(true));
         assertPersisted(#(entitysVarName) -> Assertions.assertThat(#(entitysVarName))
                 .hasSize(Convert.toInt(beforeSize + 1)));
         mvc.perform(MockMvcRequestBuilders.get("/#(entityVarName)/_query")
@@ -153,7 +163,13 @@ class #(controllerClassName) extends AbstractControllerTest<#(serviceClassName),
     @Test
     void count() throws Exception {
         val beforeSize = Convert.toInt(getService().count());
-        getService().add(createBO());
+        mvc.perform(MockMvcRequestBuilders.post("/#(entityVarName)")
+                        .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(TestUtil.convertObjectToJsonBytes(#(boUtilClassName).createBO())))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$.success").value(true));
         assertPersisted(#(entitysVarName) -> Assertions.assertThat(#(entitysVarName))
                 .hasSize(Convert.toInt(beforeSize + 1)));
         mvc.perform(MockMvcRequestBuilders.get("/#(entityVarName)/_count")
@@ -169,12 +185,17 @@ class #(controllerClassName) extends AbstractControllerTest<#(serviceClassName),
     @Test
     void getById() throws Exception {
         val beforeSize = Convert.toInt(getService().count());
-        getService().add(createBO());
+        mvc.perform(MockMvcRequestBuilders.post("/#(entityVarName)")
+                        .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(TestUtil.convertObjectToJsonBytes(#(boUtilClassName).createBO())))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$.success").value(true));
         assertPersisted(#(entitysVarName) -> Assertions.assertThat(#(entitysVarName))
                 .hasSize(Convert.toInt(beforeSize + 1)));
         val #(entityVarName) = getService().getOne(QueryWrapper.create()
-                .orderBy(#(tableDefVarName).CREATE_TIME.desc())
-                .limit(1));
+                .orderBy(#(tableDefVarName).ID.desc()));
         Assertions.assertThat(#(entityVarName)).isNotNull();
         Assertions.assertThat(#(entityVarName).getId()).isNotNull();
         val id = #(entityVarName).getId();
@@ -190,10 +211,15 @@ class #(controllerClassName) extends AbstractControllerTest<#(serviceClassName),
     @Test
     void delete() throws Exception {
         val beforeSize = Convert.toInt(getService().count());
-        getService().add(createBO());
+        mvc.perform(MockMvcRequestBuilders.post("/#(entityVarName)")
+                        .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(TestUtil.convertObjectToJsonBytes(#(boUtilClassName).createBO())))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$.success").value(true));
         val #(entityVarName) = getService().getOne(QueryWrapper.create()
-                .orderBy(#(tableDefVarName).CREATE_TIME.desc())
-                .limit(1));
+                .orderBy(#(tableDefVarName).ID.desc()));
         Assertions.assertThat(#(entityVarName)).isNotNull();
         Assertions.assertThat(#(entityVarName).getId()).isNotNull();
         val id = #(entityVarName).getId();
@@ -210,6 +236,6 @@ class #(controllerClassName) extends AbstractControllerTest<#(serviceClassName),
     void assertPersisted(Consumer<List<#(entityClassName)>> assertion) {
         val mapper = getService().getMapper();
         assertion.accept(mapper.selectListByQuery(QueryWrapper.create()
-                .orderBy(#(tableDefVarName).CREATE_TIME.desc())));
+                .orderBy(#(tableDefVarName).ID.desc())));
     }
 }
