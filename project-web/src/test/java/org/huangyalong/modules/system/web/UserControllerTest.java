@@ -5,6 +5,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mybatisflex.core.query.QueryWrapper;
 import lombok.val;
 import org.assertj.core.api.Assertions;
@@ -17,7 +18,6 @@ import org.huangyalong.modules.system.enums.UserGender;
 import org.huangyalong.modules.system.request.UserUtil;
 import org.huangyalong.modules.system.service.AccountService;
 import org.huangyalong.modules.system.service.UserService;
-import org.huangyalong.web.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -42,6 +42,9 @@ class UserControllerTest extends AbstractControllerTest<AccountService, Account>
     private MockMvc mvc;
 
     @Resource
+    private ObjectMapper objectMapper;
+
+    @Resource
     private UserService userService;
 
     @BeforeEach
@@ -57,7 +60,7 @@ class UserControllerTest extends AbstractControllerTest<AccountService, Account>
         mvc.perform(MockMvcRequestBuilders.post("/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(UserUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(UserUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -95,7 +98,7 @@ class UserControllerTest extends AbstractControllerTest<AccountService, Account>
         mvc.perform(MockMvcRequestBuilders.post("/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(UserUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(UserUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -106,7 +109,7 @@ class UserControllerTest extends AbstractControllerTest<AccountService, Account>
         mvc.perform(MockMvcRequestBuilders.put("/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(UserUtil.createBO(new JSONObject()
+                        .content(objectMapper.writeValueAsBytes(UserUtil.createBO(new JSONObject()
                                 .set("id", account.getId())
                                 .set("password", UserUtil.UPDATED_PASSWORD)
                                 .set("nickname", UserUtil.UPDATED_NICKNAME)
@@ -150,7 +153,7 @@ class UserControllerTest extends AbstractControllerTest<AccountService, Account>
         mvc.perform(MockMvcRequestBuilders.post("/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(UserUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(UserUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -176,7 +179,7 @@ class UserControllerTest extends AbstractControllerTest<AccountService, Account>
         mvc.perform(MockMvcRequestBuilders.post("/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(UserUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(UserUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -201,7 +204,7 @@ class UserControllerTest extends AbstractControllerTest<AccountService, Account>
         mvc.perform(MockMvcRequestBuilders.post("/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(UserUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(UserUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -223,7 +226,7 @@ class UserControllerTest extends AbstractControllerTest<AccountService, Account>
         mvc.perform(MockMvcRequestBuilders.post("/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(UserUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(UserUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -252,7 +255,7 @@ class UserControllerTest extends AbstractControllerTest<AccountService, Account>
         mvc.perform(MockMvcRequestBuilders.post("/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(UserUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(UserUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));

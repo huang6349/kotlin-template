@@ -2,6 +2,7 @@ package org.huangyalong.modules.system.web;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.convert.Convert;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mybatisflex.core.query.QueryWrapper;
 import lombok.val;
 import org.assertj.core.api.Assertions;
@@ -11,7 +12,6 @@ import org.huangyalong.modules.system.domain.Account;
 import org.huangyalong.modules.system.request.LoginQueries;
 import org.huangyalong.modules.system.request.UserUtil;
 import org.huangyalong.modules.system.service.AccountService;
-import org.huangyalong.web.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -33,6 +33,9 @@ class UserJWTControllerTest extends AbstractControllerTest<AccountService, Accou
     @Resource
     private MockMvc mvc;
 
+    @Resource
+    private ObjectMapper objectMapper;
+
     @BeforeEach
     void initTest() {
         val id = 10000000000000000L;
@@ -45,7 +48,7 @@ class UserJWTControllerTest extends AbstractControllerTest<AccountService, Accou
         mvc.perform(MockMvcRequestBuilders.post("/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(UserUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(UserUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -56,7 +59,7 @@ class UserJWTControllerTest extends AbstractControllerTest<AccountService, Accou
         queries.setPassword(UserUtil.DEFAULT_PASSWORD);
         mvc.perform(MockMvcRequestBuilders.post("/authenticate")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(queries)))
+                        .content(objectMapper.writeValueAsBytes(queries)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -68,7 +71,7 @@ class UserJWTControllerTest extends AbstractControllerTest<AccountService, Accou
         mvc.perform(MockMvcRequestBuilders.post("/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(UserUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(UserUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -79,7 +82,7 @@ class UserJWTControllerTest extends AbstractControllerTest<AccountService, Accou
         queries.setPassword(UserUtil.DEFAULT_PASSWORD);
         mvc.perform(MockMvcRequestBuilders.post("/authenticate")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(queries)))
+                        .content(objectMapper.writeValueAsBytes(queries)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -91,7 +94,7 @@ class UserJWTControllerTest extends AbstractControllerTest<AccountService, Accou
         mvc.perform(MockMvcRequestBuilders.post("/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(UserUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(UserUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -102,7 +105,7 @@ class UserJWTControllerTest extends AbstractControllerTest<AccountService, Accou
         queries.setPassword(UserUtil.DEFAULT_PASSWORD);
         mvc.perform(MockMvcRequestBuilders.post("/authenticate")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(queries)))
+                        .content(objectMapper.writeValueAsBytes(queries)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));

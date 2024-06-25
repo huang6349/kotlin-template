@@ -4,6 +4,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mybatisflex.core.query.QueryWrapper;
 import lombok.val;
 import org.assertj.core.api.Assertions;
@@ -14,7 +15,6 @@ import org.huangyalong.modules.system.domain.Role;
 import org.huangyalong.modules.system.enums.RoleStatus;
 import org.huangyalong.modules.system.request.RoleUtil;
 import org.huangyalong.modules.system.service.RoleService;
-import org.huangyalong.web.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -38,6 +38,9 @@ class RoleControllerTest extends AbstractControllerTest<RoleService, Role> {
     @Resource
     private MockMvc mvc;
 
+    @Resource
+    private ObjectMapper objectMapper;
+
     @BeforeEach
     public void initTest() {
         val id = 10000000000000000L;
@@ -51,7 +54,7 @@ class RoleControllerTest extends AbstractControllerTest<RoleService, Role> {
         mvc.perform(MockMvcRequestBuilders.post("/role")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(RoleUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(RoleUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -78,7 +81,7 @@ class RoleControllerTest extends AbstractControllerTest<RoleService, Role> {
         mvc.perform(MockMvcRequestBuilders.post("/role")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(RoleUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(RoleUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -89,7 +92,7 @@ class RoleControllerTest extends AbstractControllerTest<RoleService, Role> {
         mvc.perform(MockMvcRequestBuilders.put("/role")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(RoleUtil.createBO(new JSONObject()
+                        .content(objectMapper.writeValueAsBytes(RoleUtil.createBO(new JSONObject()
                                 .set("id", role.getId())
                                 .set("name", RoleUtil.UPDATED_NAME)
                                 .set("code", RoleUtil.UPDATED_CODE)
@@ -120,7 +123,7 @@ class RoleControllerTest extends AbstractControllerTest<RoleService, Role> {
         mvc.perform(MockMvcRequestBuilders.post("/role")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(RoleUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(RoleUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -146,7 +149,7 @@ class RoleControllerTest extends AbstractControllerTest<RoleService, Role> {
         mvc.perform(MockMvcRequestBuilders.post("/role")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(RoleUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(RoleUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -171,7 +174,7 @@ class RoleControllerTest extends AbstractControllerTest<RoleService, Role> {
         mvc.perform(MockMvcRequestBuilders.post("/role")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(RoleUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(RoleUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -193,7 +196,7 @@ class RoleControllerTest extends AbstractControllerTest<RoleService, Role> {
         mvc.perform(MockMvcRequestBuilders.post("/role")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(RoleUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(RoleUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -222,7 +225,7 @@ class RoleControllerTest extends AbstractControllerTest<RoleService, Role> {
         mvc.perform(MockMvcRequestBuilders.post("/role")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(RoleUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(RoleUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));

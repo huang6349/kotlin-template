@@ -2,6 +2,7 @@ package org.huangyalong.modules.system.web;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.json.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mybatisflex.core.query.QueryWrapper;
 import lombok.val;
 import org.assertj.core.api.Assertions;
@@ -16,7 +17,6 @@ import org.huangyalong.modules.system.service.AccountService;
 import org.huangyalong.modules.system.service.AccountTenantService;
 import org.huangyalong.modules.system.service.RoleService;
 import org.huangyalong.modules.system.service.TenantService;
-import org.huangyalong.web.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -41,6 +41,9 @@ class AccountTenantControllerTest extends AbstractControllerTest<AccountTenantSe
     private MockMvc mvc;
 
     @Resource
+    private ObjectMapper objectMapper;
+
+    @Resource
     private AccountService accountService;
 
     @Resource
@@ -56,7 +59,7 @@ class AccountTenantControllerTest extends AbstractControllerTest<AccountTenantSe
         mvc.perform(MockMvcRequestBuilders.post("/tenant")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(TenantUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(TenantUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -67,7 +70,7 @@ class AccountTenantControllerTest extends AbstractControllerTest<AccountTenantSe
         mvc.perform(MockMvcRequestBuilders.post("/role")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(RoleUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(RoleUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -78,7 +81,7 @@ class AccountTenantControllerTest extends AbstractControllerTest<AccountTenantSe
         mvc.perform(MockMvcRequestBuilders.post("/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(UserUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(UserUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -89,7 +92,7 @@ class AccountTenantControllerTest extends AbstractControllerTest<AccountTenantSe
         mvc.perform(MockMvcRequestBuilders.post("/tenant/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(TenantUserUtil.createBO(new JSONObject()
+                        .content(objectMapper.writeValueAsBytes(TenantUserUtil.createBO(new JSONObject()
                                 .set("accountId", account.getId())
                                 .set("tenantId", tenant.getId())
                                 .set("roleId", role.getId())))))
@@ -105,7 +108,7 @@ class AccountTenantControllerTest extends AbstractControllerTest<AccountTenantSe
         mvc.perform(MockMvcRequestBuilders.post("/tenant")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValueByLoginId(10000000000000000L))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(TenantUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(TenantUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -124,7 +127,7 @@ class AccountTenantControllerTest extends AbstractControllerTest<AccountTenantSe
         mvc.perform(MockMvcRequestBuilders.post("/tenant/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValueByLoginId(10000000000000000L))
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(TenantUserUtil.createBO(new JSONObject()
+                        .content(objectMapper.writeValueAsBytes(TenantUserUtil.createBO(new JSONObject()
                                 .set("accountId", account.getId())
                                 .set("tenantId", tenant.getId())
                                 .set("roleId", role.getId())))))
@@ -134,7 +137,7 @@ class AccountTenantControllerTest extends AbstractControllerTest<AccountTenantSe
         mvc.perform(MockMvcRequestBuilders.put("/account/tenant")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(AccountTenantUtil.createBO(new JSONObject()
+                        .content(objectMapper.writeValueAsBytes(AccountTenantUtil.createBO(new JSONObject()
                                 .set("tenantId", tenant.getId())))))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))

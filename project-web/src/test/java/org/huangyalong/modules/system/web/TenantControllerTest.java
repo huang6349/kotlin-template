@@ -4,6 +4,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mybatisflex.core.query.QueryWrapper;
 import lombok.val;
 import org.assertj.core.api.Assertions;
@@ -17,7 +18,6 @@ import org.huangyalong.modules.system.enums.TenantStatus;
 import org.huangyalong.modules.system.request.TenantUtil;
 import org.huangyalong.modules.system.service.TenantPropertyService;
 import org.huangyalong.modules.system.service.TenantService;
-import org.huangyalong.web.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -45,6 +45,9 @@ class TenantControllerTest extends AbstractControllerTest<TenantService, Tenant>
     private MockMvc mvc;
 
     @Resource
+    private ObjectMapper objectMapper;
+
+    @Resource
     private TenantPropertyService propertyService;
 
     @BeforeEach
@@ -60,7 +63,7 @@ class TenantControllerTest extends AbstractControllerTest<TenantService, Tenant>
         mvc.perform(MockMvcRequestBuilders.post("/tenant")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(TenantUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(TenantUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -115,7 +118,7 @@ class TenantControllerTest extends AbstractControllerTest<TenantService, Tenant>
         mvc.perform(MockMvcRequestBuilders.post("/tenant")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(TenantUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(TenantUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -126,7 +129,7 @@ class TenantControllerTest extends AbstractControllerTest<TenantService, Tenant>
         mvc.perform(MockMvcRequestBuilders.put("/tenant")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(TenantUtil.createBO(new JSONObject()
+                        .content(objectMapper.writeValueAsBytes(TenantUtil.createBO(new JSONObject()
                                 .set("id", tenant.getId())
                                 .set("name", TenantUtil.UPDATED_NAME)
                                 .set("abbr", TenantUtil.UPDATED_ABBR)
@@ -188,7 +191,7 @@ class TenantControllerTest extends AbstractControllerTest<TenantService, Tenant>
         mvc.perform(MockMvcRequestBuilders.post("/tenant")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(TenantUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(TenantUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -217,7 +220,7 @@ class TenantControllerTest extends AbstractControllerTest<TenantService, Tenant>
         mvc.perform(MockMvcRequestBuilders.post("/tenant")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(TenantUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(TenantUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -245,7 +248,7 @@ class TenantControllerTest extends AbstractControllerTest<TenantService, Tenant>
         mvc.perform(MockMvcRequestBuilders.post("/tenant")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(TenantUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(TenantUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -267,7 +270,7 @@ class TenantControllerTest extends AbstractControllerTest<TenantService, Tenant>
         mvc.perform(MockMvcRequestBuilders.post("/tenant")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(TenantUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(TenantUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -299,7 +302,7 @@ class TenantControllerTest extends AbstractControllerTest<TenantService, Tenant>
         mvc.perform(MockMvcRequestBuilders.post("/tenant")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(TenantUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(TenantUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));

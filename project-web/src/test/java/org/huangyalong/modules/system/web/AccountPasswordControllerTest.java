@@ -1,6 +1,7 @@
 package org.huangyalong.modules.system.web;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mybatisflex.core.query.QueryWrapper;
 import lombok.val;
 import org.assertj.core.api.Assertions;
@@ -10,7 +11,6 @@ import org.huangyalong.modules.system.domain.Account;
 import org.huangyalong.modules.system.request.AccountPasswordUtil;
 import org.huangyalong.modules.system.request.UserUtil;
 import org.huangyalong.modules.system.service.AccountService;
-import org.huangyalong.web.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -32,6 +32,9 @@ class AccountPasswordControllerTest extends AbstractControllerTest<AccountServic
     private MockMvc mvc;
 
     @Resource
+    private ObjectMapper objectMapper;
+
+    @Resource
     private AccountService accountService;
 
     @BeforeEach
@@ -41,7 +44,7 @@ class AccountPasswordControllerTest extends AbstractControllerTest<AccountServic
         mvc.perform(MockMvcRequestBuilders.post("/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(UserUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(UserUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -58,7 +61,7 @@ class AccountPasswordControllerTest extends AbstractControllerTest<AccountServic
         mvc.perform(MockMvcRequestBuilders.put("/account/password")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(AccountPasswordUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(AccountPasswordUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));

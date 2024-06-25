@@ -4,6 +4,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mybatisflex.core.query.QueryWrapper;
 import lombok.val;
 import org.assertj.core.api.Assertions;
@@ -12,11 +13,13 @@ import org.huangyalong.core.enums.IsDeleted;
 import org.huangyalong.core.web.AbstractControllerTest;
 import org.huangyalong.modules.system.domain.Dept;
 import org.huangyalong.modules.system.enums.DeptStatus;
-import org.huangyalong.modules.system.request.*;
+import org.huangyalong.modules.system.request.DeptUtil;
+import org.huangyalong.modules.system.request.TenantUserUtil;
+import org.huangyalong.modules.system.request.TenantUtil;
+import org.huangyalong.modules.system.request.UserUtil;
 import org.huangyalong.modules.system.service.AccountService;
 import org.huangyalong.modules.system.service.DeptService;
 import org.huangyalong.modules.system.service.TenantService;
-import org.huangyalong.web.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -43,6 +46,9 @@ class DeptControllerTest extends AbstractControllerTest<DeptService, Dept> {
     private MockMvc mvc;
 
     @Resource
+    private ObjectMapper objectMapper;
+
+    @Resource
     private AccountService accountService;
 
     @Resource
@@ -55,7 +61,7 @@ class DeptControllerTest extends AbstractControllerTest<DeptService, Dept> {
         mvc.perform(MockMvcRequestBuilders.post("/tenant")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(TenantUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(TenantUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -66,7 +72,7 @@ class DeptControllerTest extends AbstractControllerTest<DeptService, Dept> {
         mvc.perform(MockMvcRequestBuilders.post("/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(UserUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(UserUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -77,7 +83,7 @@ class DeptControllerTest extends AbstractControllerTest<DeptService, Dept> {
         mvc.perform(MockMvcRequestBuilders.post("/tenant/user")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(TenantUserUtil.createBO(new JSONObject()
+                        .content(objectMapper.writeValueAsBytes(TenantUserUtil.createBO(new JSONObject()
                                 .set("accountId", account.getId())
                                 .set("tenantId", tenant.getId())
                                 .set("roleId", 10000000000000000L)))))
@@ -94,7 +100,7 @@ class DeptControllerTest extends AbstractControllerTest<DeptService, Dept> {
         mvc.perform(MockMvcRequestBuilders.post("/dept")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(DeptUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(DeptUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -121,7 +127,7 @@ class DeptControllerTest extends AbstractControllerTest<DeptService, Dept> {
         mvc.perform(MockMvcRequestBuilders.post("/dept")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(DeptUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(DeptUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -132,7 +138,7 @@ class DeptControllerTest extends AbstractControllerTest<DeptService, Dept> {
         mvc.perform(MockMvcRequestBuilders.put("/dept")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(DeptUtil.createBO(new JSONObject()
+                        .content(objectMapper.writeValueAsBytes(DeptUtil.createBO(new JSONObject()
                                 .set("id", dept.getId())
                                 .set("name", DeptUtil.UPDATED_NAME)
                                 .set("code", DeptUtil.UPDATED_CODE)
@@ -163,7 +169,7 @@ class DeptControllerTest extends AbstractControllerTest<DeptService, Dept> {
         mvc.perform(MockMvcRequestBuilders.post("/dept")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(DeptUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(DeptUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -189,7 +195,7 @@ class DeptControllerTest extends AbstractControllerTest<DeptService, Dept> {
         mvc.perform(MockMvcRequestBuilders.post("/dept")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(DeptUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(DeptUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -214,7 +220,7 @@ class DeptControllerTest extends AbstractControllerTest<DeptService, Dept> {
         mvc.perform(MockMvcRequestBuilders.post("/dept")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(DeptUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(DeptUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -236,7 +242,7 @@ class DeptControllerTest extends AbstractControllerTest<DeptService, Dept> {
         mvc.perform(MockMvcRequestBuilders.post("/dept")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(DeptUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(DeptUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
@@ -265,7 +271,7 @@ class DeptControllerTest extends AbstractControllerTest<DeptService, Dept> {
         mvc.perform(MockMvcRequestBuilders.post("/dept")
                         .header(StpUtil.getTokenName(), StpUtil.getTokenValue())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(DeptUtil.createBO())))
+                        .content(objectMapper.writeValueAsBytes(DeptUtil.createBO())))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.success").value(true));
