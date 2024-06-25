@@ -21,6 +21,7 @@ public class BOUtilGenerator implements IGenerator {
         val packageName = packageConfig.getBasePackage().concat(".request");
         val className = table.buildEntityClassName().concat("Util");
         val logName = "BOUtil";
+        val comment = table.getComment();
         GeneratorUtil.generate(table,
                 packageConfig,
                 globalConfig,
@@ -28,6 +29,7 @@ public class BOUtilGenerator implements IGenerator {
                 getTemplatePath(),
                 packageName,
                 className,
-                logName);
+                logName,
+                comment);
     }
 }

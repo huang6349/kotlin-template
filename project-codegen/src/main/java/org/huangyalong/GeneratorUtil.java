@@ -17,17 +17,21 @@ public class GeneratorUtil {
                                 String templatePath,
                                 String packageName,
                                 String className,
-                                String logName) {
+                                String logName,
+                                String comment) {
         val tableDefConfig = globalConfig.getTableDefConfig();
         val javadocConfig = globalConfig.getJavadocConfig();
         val packagePath = packageName.replace(".", "/");
         val javaFile = new File(sourceDir, packagePath + "/" + className + ".java");
         if (javaFile.exists()) return;
-        val params = new HashMap<String, Object>(4);
+        val params = new HashMap<String, Object>(7);
         params.put("table", table);
         params.put("packageConfig", packageConfig);
         params.put("tableDefConfig", tableDefConfig);
         params.put("javadocConfig", javadocConfig);
+        params.put("packageName", packageName);
+        params.put("className", className);
+        params.put("comment", comment);
         val template = globalConfig.getTemplateConfig().getTemplate();
         template.generate(params, templatePath, javaFile);
         System.out.println(logName + " ---> " + javaFile);
