@@ -13,7 +13,7 @@
 #set(boClassName = entityClassName.concat("BO"))
 #set(serviceVarName = firstCharToLowerCase(serviceClassName))
 #set(entityVarName = firstCharToLowerCase(entityClassName))
-#set(controllerComment = table.getComment().replace("信息", "管理"))
+#set(comment = table.getComment().replace("信息", "管理"))
 package #(controllerPackage);
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
@@ -41,7 +41,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/#(entityVarName)")
-@Tag(name = "#(controllerComment)")
+@Tag(name = "#(comment)")
 public class #(controllerClassName) extends BaseControllerImpl<#(serviceClassName), #(entityClassName)> {
 
     @SaCheckLogin

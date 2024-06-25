@@ -33,12 +33,14 @@ public class #(serviceImplClassName) extends #(superClassName)<#(mapperClassName
     @Transactional(rollbackFor = Exception.class)
     public boolean add(#(boClassName) payload) {
         val data = BeanUtil.copyProperties(payload, #(entityClassName).class);
-        return super.save(data);
+        super.save(data);
+        return Boolean.TRUE;
     }
 
     @Transactional(rollbackFor = Exception.class)
     public boolean update(#(boClassName) payload) {
         val data = BeanUtil.copyProperties(payload, #(entityClassName).class);
-        return super.updateById(data);
+        super.updateById(data);
+        return Boolean.TRUE;
     }
 }

@@ -23,8 +23,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 import static org.huangyalong.modules.system.domain.table.AccountTableDef.ACCOUNT;
 
 @AllArgsConstructor
@@ -41,7 +39,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account>
         if (!SpringMVCUtil.isWeb() || ObjectUtil.isNull(id)) return null;
         val key = StrUtil.format("account_nickname_{}", id);
         val nickname = redisTemplate.opsForValue().get(key);
-        return Optional.ofNullable(nickname)
+        return Opt.ofNullable(nickname)
                 .orElse(null);
     }
 
@@ -49,7 +47,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account>
     public String loadNickname() {
         if (!SpringMVCUtil.isWeb()) return null;
         val loginId = loadLoginId();
-        return this.loadNickname(Optional.ofNullable(loginId)
+        return this.loadNickname(Opt.ofNullable(loginId)
                 .orElse(null));
     }
 
@@ -57,7 +55,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account>
     public String loadLoginIdAsString() {
         if (!SpringMVCUtil.isWeb()) return null;
         val loginId = StpUtil.getLoginIdDefaultNull();
-        return Optional.ofNullable(loginId)
+        return Opt.ofNullable(loginId)
                 .map(Convert::toStr)
                 .orElse(null);
     }
@@ -66,7 +64,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account>
     public Long loadLoginId() {
         if (!SpringMVCUtil.isWeb()) return null;
         val loginId = StpUtil.getLoginIdDefaultNull();
-        return Optional.ofNullable(loginId)
+        return Opt.ofNullable(loginId)
                 .map(Convert::toLong)
                 .orElse(null);
     }
