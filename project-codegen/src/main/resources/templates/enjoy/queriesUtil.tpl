@@ -1,9 +1,11 @@
-package #(queriesUtilPackage);
+#set(entityClassName = table.buildEntityClassName())
+#set(queriesClassName = entityClassName.concat("Queries"))
+package #(packageName);
 
 import com.mybatisflex.core.query.QueryWrapper;
 import lombok.val;
 
-public final class #(queriesUtilClassName) {
+public final class #(className) {
 
     public static QueryWrapper getQueryWrapper(@SuppressWarnings("unused") #(queriesClassName) queries,
                                                QueryWrapper query) {

@@ -5,9 +5,6 @@ import com.mybatisflex.codegen.entity.Table;
 import com.mybatisflex.codegen.generator.IGenerator;
 import lombok.*;
 
-import java.io.File;
-import java.util.HashMap;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -20,17 +17,18 @@ public class QueriesUtilGenerator implements IGenerator {
     public void generate(Table table, GlobalConfig globalConfig) {
         val packageConfig = globalConfig.getPackageConfig();
         val sourceDir = packageConfig.getSourceDir();
-        val queriesUtilPackage = packageConfig.getBasePackage().concat(".request");
-        val queriesClassName = table.buildEntityClassName().concat("Queries");
-        val queriesUtilClassName = table.buildEntityClassName().concat("QueriesUtil");
-        val queriesUtilPackagePath = queriesUtilPackage.replace(".", "/");
-        val queriesJavaFile = new File(sourceDir, queriesUtilPackagePath + "/" + queriesUtilClassName + ".java");
-        if (queriesJavaFile.exists()) return;
-        val params = new HashMap<String, Object>(3);
-        params.put("queriesUtilPackage", queriesUtilPackage);
-        params.put("queriesClassName", queriesClassName);
-        params.put("queriesUtilClassName", queriesUtilClassName);
-        globalConfig.getTemplateConfig().getTemplate().generate(params, templatePath, queriesJavaFile);
-        System.out.println("QueriesUtil ---> " + queriesJavaFile);
+        val packageName = packageConfig.getBasePackage().concat(".request");
+        val className = table.buildEntityClassName().concat("QueriesUtil");
+        val logName = "QueriesUtil";
+        val comment = table.getComment();
+        GeneratorUtil.generate(table,
+                packageConfig,
+                globalConfig,
+                sourceDir,
+                getTemplatePath(),
+                packageName,
+                className,
+                logName,
+                comment);
     }
 }
