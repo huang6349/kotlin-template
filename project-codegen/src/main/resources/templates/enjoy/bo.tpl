@@ -1,4 +1,4 @@
-package #(boPackage);
+package #(packageName);
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -9,6 +9,6 @@ import org.huangyalong.core.request.AbstractBaseBO;
 @NoArgsConstructor
 @Getter
 @Setter
-@Schema(name = "#(boComment)")
-public class #(boClassName) extends AbstractBaseBO {
+@Schema(name = "#(comment)")
+public class #(className) extends AbstractBaseBO {
 }
