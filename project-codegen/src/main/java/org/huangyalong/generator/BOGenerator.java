@@ -1,6 +1,5 @@
-package org.huangyalong;
+package org.huangyalong.generator;
 
-import cn.hutool.core.util.StrUtil;
 import com.mybatisflex.codegen.config.GlobalConfig;
 import com.mybatisflex.codegen.entity.Table;
 import com.mybatisflex.codegen.generator.IGenerator;
@@ -10,17 +9,17 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class BOUtilGenerator implements IGenerator {
+public class BOGenerator implements IGenerator {
 
-    private String templatePath = "/templates/enjoy/boUtil.tpl";
+    private String templatePath = "/templates/enjoy/bo.tpl";
 
     @Override
     public void generate(Table table, GlobalConfig globalConfig) {
         val packageConfig = globalConfig.getPackageConfig();
-        val sourceDir = StrUtil.replaceFirst(packageConfig.getSourceDir(), "main", "test");
+        val sourceDir = packageConfig.getSourceDir();
         val packageName = packageConfig.getBasePackage().concat(".request");
-        val className = table.buildEntityClassName().concat("Util");
-        val logName = "BOUtil";
+        val className = table.buildEntityClassName().concat("BO");
+        val logName = "BO";
         val comment = table.getComment();
         GeneratorUtil.generate(table,
                 packageConfig,

@@ -1,12 +1,15 @@
 package org.huangyalong;
 
+import cn.hutool.setting.dialect.Props;
 import com.mybatisflex.codegen.Generator;
 import com.mybatisflex.codegen.config.GlobalConfig;
 import com.mybatisflex.codegen.generator.GeneratorFactory;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.val;
+import org.huangyalong.generator.*;
 
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class CodegenUtil {
 
@@ -21,9 +24,11 @@ public class CodegenUtil {
 
         // 配置数据源
         val dataSource = new HikariDataSource();
-        dataSource.setJdbcUrl("jdbc:mysql://100.100.100.252:3308/project?useSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai");
-        dataSource.setUsername("root");
-        dataSource.setPassword("pwd123456");
+        val props = new AtomicReference<>(new Props("codegen.properties")).get();
+        dataSource.setDriverClassName(props.getStr("driver-class-name"));
+        dataSource.setJdbcUrl(props.getStr("url"));
+        dataSource.setUsername(props.getStr("username"));
+        dataSource.setPassword(props.getStr("password"));
 
         // 配置生成器
         val globalConfig = new GlobalConfig();

@@ -1,4 +1,4 @@
-package org.huangyalong;
+package org.huangyalong.generator;
 
 import com.mybatisflex.codegen.config.GlobalConfig;
 import com.mybatisflex.codegen.config.PackageConfig;
