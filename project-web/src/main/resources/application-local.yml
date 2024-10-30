@@ -6,14 +6,14 @@ spring:
     username: root
     password: pwd123456
     hikari:
-      minimum-idle: 5
+      minimum-idle: 10
       connection-test-query: SELECT 1 FROM DUAL
       maximum-pool-size: 20
-      idle-timeout: 600000
-      max-lifetime: 1800000
+      idle-timeout: 30000
+      max-lifetime: 60000
       auto-commit: true
       pool-name: PrimaryHikariCP
-      connection-timeout: 30000
+      connection-timeout: 10000
 
   flyway:
     baseline-on-migrate: true

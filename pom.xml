@@ -26,7 +26,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.locales>zh_CN</project.build.locales>
         <project.build.jdk>${java.version}</project.build.jdk>
-        <kotlin.version>1.7.21</kotlin.version>
+        <kotlin.version>1.7.22</kotlin.version>
         <kotlin.incremental.useClasspathSnapshot>true</kotlin.incremental.useClasspathSnapshot>
         <revision>0.0.1-SNAPSHOT</revision>
     </properties>
@@ -49,7 +49,7 @@
             <dependency>
                 <groupId>com.mybatis-flex</groupId>
                 <artifactId>mybatis-flex-dependencies</artifactId>
-                <version>1.8.2</version>
+                <version>1.8.9</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

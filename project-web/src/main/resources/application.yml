@@ -23,6 +23,8 @@ spring:
   servlet:
     multipart:
       enabled: true
+      max-file-size: 10MB
+      max-request-size: 100MB
 
 management:
   server:
@@ -31,10 +33,10 @@ management:
 server:
   port: 8088
 
-camel:
-  springboot:
-    main-run-controller: true
-
 mybatis-flex:
   global-config:
     print-banner: false
+
+camel:
+  springboot:
+    main-run-controller: true
